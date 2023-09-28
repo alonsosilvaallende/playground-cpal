@@ -8,7 +8,10 @@ from langchain_experimental.pal_chain import PALChain
 from langchain_experimental.cpal.base import CPALChain
 
 
-st.title("Causal Program-Aided LLMs")
+title = "Causal Program-Aided LLMs"
+st.set_page_config(page_title=title, page_icon=None, layout="centered")
+
+st.title(title)
 
 example1 = """Jan has three times the number of pets as Marcia.
 Marcia has two more pets than Cindy.
