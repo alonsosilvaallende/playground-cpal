@@ -55,7 +55,7 @@ if example == "Causal confounder":
     st.markdown(":blue[Correct answer: 20]")
 
 if example=="Unanswerable question":
-    st.markdown(":blue[Correct answer: Unanswerable question]")
+    st.markdown(":blue[Correct answer: Unanswerable]")
 
 if example=="Complex narrative":
     st.markdown(":blue[Correct answer: 13]")
