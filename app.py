@@ -7,6 +7,9 @@ from langchain.chat_models import ChatOpenAI
 from langchain_experimental.pal_chain import PALChain
 from langchain_experimental.cpal.base import CPALChain
 
+
+st.title("Causal Program-Aided LLMs")
+
 example1 = """Jan has three times the number of pets as Marcia.
 Marcia has two more pets than Cindy.
 If Cindy has four pets, how many total pets do all of them have?"""
@@ -22,7 +25,7 @@ example5 = """Tim buys the same number of pets as Cindy and Boris. Cindy buys th
 column1, column2 = st.columns([1,2])
 
 with column1:
-    example = st.radio("Examples", ["Unanswerable question", "Complex narrative", "Causal mediator", "Causal collider", "Causal confounder"])
+    example = st.radio("Examples:", ["Unanswerable question", "Complex narrative", "Causal mediator", "Causal collider", "Causal confounder"])
 
 Example1 = False
 Example2 = False
@@ -57,26 +60,26 @@ if example=="Unanswerable question":
 if example=="Complex narrative":
     st.markdown(":blue[Correct answer: 13]")
 
-text = ""
+# Initialization
+if 'text' not in st.session_state:
+    st.session_state['text'] = ''
+
 if Example1:
-    text = example1
+    st.session_state['text'] = example1
 if Example2:
-    text = example2
+    st.session_state['text'] = example2
 if Example3:
-    text = example3
+    st.session_state['text'] = example3
 if Example4:
-    text = example4
+    st.session_state['text'] = example4
 if Example5:
-    text = example5
+    st.session_state['text'] = example5
 
-#def on_message_change():
-#    prompt = st.session_state["input"]
-#    prompt = prompt.replace("\"", "")
-#    prompt = prompt.replace("\n", " ")
+with st.form(key='my_form'):
+    prompt = st.text_area("Question:", st.session_state['text'])
+    submit_button = st.form_submit_button(label='Submit')
 
-prompt = st.text_area("Question:", value=text)
-prompt = prompt.replace("\"", "")
-prompt = prompt.replace("\n", " ")
+#prompt = st.text_area("Question:", value=text, on_change=on_message_change)
 
 column1, column2 = st.columns([1,1])
 with column1:
@@ -93,7 +96,9 @@ cpal_chain = CPALChain.from_univariate_prompt(llm=llm2, verbose=True)
 pred_llm = ""
 # pred_pal = ""
 pred_cpal = ""
-if prompt != "":
+if submit_button:
+    prompt = prompt.replace("\"", "")
+    prompt = prompt.replace("\n", " ")
     if Example1:
         prompt = example1
     col1, col3 = st.columns(2)
