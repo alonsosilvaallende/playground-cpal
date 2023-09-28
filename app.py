@@ -6,7 +6,7 @@ import streamlit as st
 from langchain.chat_models import ChatOpenAI
 from langchain_experimental.pal_chain import PALChain
 from langchain_experimental.cpal.base import CPALChain
-
+from tempfile import NamedTemporaryFile
 
 title = "Causal Program-Aided LLMs"
 st.set_page_config(page_title=title, page_icon=None, layout="centered")
@@ -97,43 +97,31 @@ cpal_chain = CPALChain.from_univariate_prompt(llm=llm2, verbose=True)
 
 
 pred_llm = ""
-# pred_pal = ""
 pred_cpal = ""
 if submit_button:
     prompt = prompt.replace("\"", "")
     prompt = prompt.replace("\n", " ")
-    if Example1:
-        prompt = example1
-    col1, col3 = st.columns(2)
-    #col1, col2, col3 = st.columns(3)
+
+    col1, col2 = st.columns(2)
       
-    pred_llm = llm.predict(prompt)
     with col1:
         st.header(f"{model1}")
+        pred_llm = llm.predict(prompt)
         st.markdown(pred_llm)
-#    try:
-#        pred_pal = pal_chain.run(prompt)
-#    except Exception as e_msg_pal:
-#        pred_pal = e_msg_pal
-#    with col2:
-#        st.header("PAL")
-#        st.write(pred_pal)
-    try:
-        pred_cpal = cpal_chain.run(prompt)
-    except Exception as e_msg_cpal:
-        pred_cpal = e_msg_cpal
-
-    with col3:
+    with col2:
         st.header(f"Causal Program-Aided {model2}")
-        st.write(pred_cpal)
+        try:
+            pred_cpal = cpal_chain.run(prompt)
+            st.write(pred_cpal)
+            with NamedTemporaryFile(suffix=".svg") as temp:
+                cpal_chain.draw(path=f"{temp.name}")
+                st.image(f"{temp.name}")
+        except Exception as e_msg_cpal:
+            pred_cpal = e_msg_cpal
+            st.write(pred_cpal)
 else:
-    col1, col3 = st.columns(2)
-    #col1, col2, col3 = st.columns(3)
+    col1, col2 = st.columns(2)
     with col1:
         st.header(f"{model1}")
-    #with col2:
-    #    st.header("PAL")
-    with col3:
+    with col2:
         st.header(f"Causal Program-Aided {model2}")
-
-
