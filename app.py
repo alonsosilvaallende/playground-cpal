@@ -1,7 +1,7 @@
 import streamlit as st
 
-from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
+#from dotenv import load_dotenv, find_dotenv
+#load_dotenv(find_dotenv())
 
 from langchain.chat_models import ChatOpenAI
 from langchain_experimental.pal_chain import PALChain
