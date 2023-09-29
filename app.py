@@ -1,7 +1,7 @@
 import streamlit as st
 
-#from dotenv import load_dotenv, find_dotenv
-#load_dotenv(find_dotenv())
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
 
 from langchain.chat_models import ChatOpenAI
 from langchain_experimental.pal_chain import PALChain
@@ -21,11 +21,22 @@ example2 = """Alice has the number of pets as Bob plus the number of pets as Cin
 Bob has no pets. 
 If Cindy has four pets, how many total pets do all of them have?"""
 
-example3 = """Alice has the number of pets as Bob plus the number of pets as Cindy. Bob has two more pets than Cindy. If Cindy has four pets, how many total pets do all of them have?"""
+example3 = """Alice has the number of pets as Bob plus the number of pets as Cindy.
+Bob has two more pets than Cindy.
+If Cindy has four pets, how many total pets do all of them have?"""
 
-example4 = """Alice has three times the number of pets as Bob. Bob has two more pets than Cindy. If Cindy has ten pets, how many pets does Dennis have?"""
+example4 = """Alice has three times the number of pets as Bob.
+Bob has two more pets than Cindy.
+If Cindy has ten pets, how many pets does Dennis have?"""
 
-example5 = """Tim buys the same number of pets as Cindy and Boris. Cindy buys the same number of pets as Bill plus Bob. Boris buys the same number of pets as Ben plus Beth. Bill buys the same number of pets as Obama. Bob buys the same number of pets as Obama. Ben buys the same number of pets as Obama. Beth buys the same number of pets as Obama. If Obama buys one pet, how many pets total does everyone buy?"""
+example5 = """Tim buys the same number of pets as Cindy and Boris.
+Cindy buys the same number of pets as Bill plus Bob.
+Boris buys the same number of pets as Ben plus Beth.
+Bill buys the same number of pets as Obama.
+Bob buys the same number of pets as Obama.
+Ben buys the same number of pets as Obama.
+Beth buys the same number of pets as Obama.
+If Obama buys one pet, how many pets total does everyone buy?"""
 
 column1, column2 = st.columns([1,2])
 
@@ -81,7 +92,7 @@ if Example5:
     st.session_state['text'] = example5
 
 with st.form(key='my_form'):
-    prompt = st.text_area("Question:", st.session_state['text'])
+    prompt = st.text_area("Question:", st.session_state['text'], height=220)
     submit_button = st.form_submit_button(label='Submit')
 
 #prompt = st.text_area("Question:", value=text, on_change=on_message_change)
