@@ -13,15 +13,17 @@ st.set_page_config(page_title=title, page_icon=None, layout="centered")
 
 st.title(title)
 
-example1 = """Jan has three times the number of pets as Marcia.
-Marcia has two more pets than Cindy.
+example1 = """Alice has three times the number of pets as Bob.
+Bob has two more pets than Cindy.
 If Cindy has four pets, how many total pets do all of them have?"""
 
-example2 = """Jan has the number of pets as Marcia plus the number of pets as Cindy. Marcia has no pets. If Cindy has four pets, how many total pets do all of them have?"""
+example2 = """Alice has the number of pets as Bob plus the number of pets as Cindy.
+Bob has no pets. 
+If Cindy has four pets, how many total pets do all of them have?"""
 
-example3 = """Jan has the number of pets as Marcia plus the number of pets as Cindy. Marcia has two more pets than Cindy. If Cindy has four pets, how many total pets do all of them have?"""
+example3 = """Alice has the number of pets as Bob plus the number of pets as Cindy. Bob has two more pets than Cindy. If Cindy has four pets, how many total pets do all of them have?"""
 
-example4 = """Jan has three times the number of pets as Marcia. Marcia has two more pets than Cindy. If Cindy has ten pets, how many pets does Barak have?"""
+example4 = """Alice has three times the number of pets as Bob. Bob has two more pets than Cindy. If Cindy has ten pets, how many pets does Dennis have?"""
 
 example5 = """Tim buys the same number of pets as Cindy and Boris. Cindy buys the same number of pets as Bill plus Bob. Boris buys the same number of pets as Ben plus Beth. Bill buys the same number of pets as Obama. Bob buys the same number of pets as Obama. Ben buys the same number of pets as Obama. Beth buys the same number of pets as Obama. If Obama buys one pet, how many pets total does everyone buy?"""
 
